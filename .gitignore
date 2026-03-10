@@ -4,8 +4,19 @@
 # ruby
 vendor/
 Gemfile.lock
+*.gem
 
 # nodejs
 node_modules/
 package.json
 package-lock.json
+
+# scripts
+*.mp4
+
+# miscellaneous
+usb_store/
+web/**
+!web/setup.sh
+!web/Gemfile
+downloads/
