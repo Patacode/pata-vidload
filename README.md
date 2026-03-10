@@ -1,8 +1,8 @@
 # pata-vidload
 
 Utility to download various type of videos from web to local. Primary focus
-on a javascript snippet to copy-paste in browser devtools console which will
-download the streamed videos locally.
+on a ruby lib using playwright to simulate browser sessions, capture network
+traffic and remux videos into .mp4 format.
 
 Targeted video types:
 
@@ -20,3 +20,14 @@ cd ../web
 ```
 
 From there, you can configure and customize the downloader as you wish
+
+## todo
+
+- [ ] enhance CLIs using thor gem
+- [ ] setup proper ci/cd to deploy gem locally and on rubygems.org
+- [ ] implement loading spinner for loading messages
+- [ ] implement progress bar with segment infos instead of full ffmpeg output
+- [ ] extend list of supported video downloaders
+- [ ] add cli arg to output .mp4 video into some custom dir
+- [ ] update release.sh script to output its built gems into separate dir
+- [ ] implement way to auto-name a video if no name was given
