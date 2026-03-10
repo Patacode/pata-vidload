@@ -68,7 +68,7 @@ module Vidload::Mp2t::Api
       puts "\tvideo_referer=#{@video_referer}"
     end
 
-    def display_with_spinner(loading_msg = "Loading...")
+    def self.display_with_spinner(loading_msg = "Loading...")
       spinner = TTY::Spinner.new("[:spinner] #{loading_msg}")
       spinner.auto_spin
       yield
@@ -99,7 +99,7 @@ module Vidload::Mp2t::Api
     end
 
     def navigate_to_url(url, page)
-      display_with_spinner("Page #{url} loading...") do
+      Downloader.display_with_spinner("Page #{url} loading...") do
         page.goto(url)
       end
     end
