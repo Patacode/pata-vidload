@@ -31,3 +31,4 @@ From there, you can configure and customize the downloader as you wish
 - [ ] add cli arg to output .mp4 video into some custom dir
 - [ ] update release.sh script to output its built gems into separate dir
 - [ ] implement way to auto-name a video if no name was given
+- [ ] implement cli arg to provide video author name
