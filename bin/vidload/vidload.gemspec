@@ -1,3 +1,5 @@
+require_relative "lib/vidload"
+
 Gem::Specification.new do |s|
   s.name        = "vidload"
   s.version     = Vidload::VERSION
