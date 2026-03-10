@@ -6,4 +6,5 @@ Gem::Specification.new do |s|
   s.files       = Dir["lib/**/*.rb", "lib/**/*.sh"]
   s.require_paths = ["lib"]
   s.add_dependency "playwright-ruby-client", "~> 1.58"
+  s.add_dependency "tty-spinner", "~> 0.9"
 end

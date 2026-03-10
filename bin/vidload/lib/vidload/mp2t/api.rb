@@ -1,5 +1,6 @@
 require "playwright"
 require "thread"
+require "tty-spinner"
 
 module Vidload::Mp2t::Api
   DEMUXER_PATH = "#{__dir__}/remuxer.sh"
@@ -42,6 +43,19 @@ module Vidload::Mp2t::Api
       )
     end
 
+    # main func to be called in your own scripts defined under web/
+    def download_video(video_starter_callbacks: [])
+      Playwright.create(playwright_cli_executable_path: @playwright_cli_path) do |playwright|
+        browser = playwright.chromium.launch
+        page = browser.new_page
+
+        manage_video_download(page, *video_starter_callbacks)
+        wait_until_video_downloaded
+
+        browser.close
+      end
+    end
+
     def display_calling_args
       puts "Constants:"
       puts "\tDEMUXER_PATH=#{DEMUXER_PATH}"
@@ -54,17 +68,11 @@ module Vidload::Mp2t::Api
       puts "\tvideo_referer=#{@video_referer}"
     end
 
-    # main func to be called in your own scripts defined under web/
-    def download_video(video_starter_callbacks: [])
-      Playwright.create(playwright_cli_executable_path: @playwright_cli_path) do |playwright|
-        browser = playwright.chromium.launch
-        page = browser.new_page
-
-        manage_video_download(page, *video_starter_callbacks)
-        wait_until_video_downloaded
-
-        browser.close
-      end
+    def display_with_spinner(loading_msg = "Loading...")
+      spinner = TTY::Spinner.new("[:spinner] #{loading_msg}")
+      spinner.auto_spin
+      yield
+      spinner.success("(done)")
     end
 
     private
@@ -91,12 +99,9 @@ module Vidload::Mp2t::Api
     end
 
     def navigate_to_url(url, page)
-      print "Page #{url} loading..."
-      page.goto(url)
-      print "\r"
-      print " " * 16 + " " * url.length
-      print "\r"
-      puts "Page #{url} loaded!"
+      display_with_spinner("Page #{url} loading...") do
+        page.goto(url)
+      end
     end
   end
 end
