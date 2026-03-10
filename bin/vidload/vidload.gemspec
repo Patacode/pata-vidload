@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "vidload"
-  s.version     = "0.1.3"
+  s.version     = "0.1.4"
   s.authors     = ["Patacode"]
   s.summary     = "Download videos from web to local"
   s.files       = Dir["lib/**/*.rb", "lib/**/*.sh"]

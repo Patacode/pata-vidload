@@ -2,7 +2,7 @@ require "playwright"
 require "thread"
 
 module Vidload::Mp2t::Api
-  DEMUXER_PATH = "#{__dir__}/demuxer.sh"
+  DEMUXER_PATH = "#{__dir__}/remuxer.sh"
   VIDEO_DOWNLOADED_EVENT_QUEUE = Queue.new
 
   class Downloader
