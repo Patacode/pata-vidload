@@ -1,6 +1,7 @@
 require "playwright"
 require "thread"
 require "tty-spinner"
+require "open3"
 
 module Vidload::Mp2t::Api
   DEMUXER_PATH = "#{__dir__}/remuxer.sh"
@@ -15,7 +16,8 @@ module Vidload::Mp2t::Api
       hls_url:,
       master_playlist_name:,
       playwright_cli_path:,
-      video_referer:
+      video_referer:,
+      ts_seg_pattern:
     )
       raise ArgumentError, "video_url must be provided" unless video_url
       raise ArgumentError, "video_name must be provided" unless video_name
@@ -23,6 +25,7 @@ module Vidload::Mp2t::Api
       raise ArgumentError, "master_playlist_name must be provided" unless master_playlist_name
       raise ArgumentError, "playwright_cli_path must be provided" unless playwright_cli_path
       raise ArgumentError, "video_referer must be provided" unless video_referer
+      raise ArgumentError, "ts_seg_pattern must be provided" unless ts_seg_pattern
 
       @video_url = video_url
       @video_name = video_name
@@ -30,6 +33,7 @@ module Vidload::Mp2t::Api
       @master_playlist_name = master_playlist_name
       @playwright_cli_path = playwright_cli_path
       @video_referer = video_referer
+      @ts_seg_pattern = ts_seg_pattern
     end
 
     def self.from_argv
@@ -39,7 +43,8 @@ module Vidload::Mp2t::Api
         hls_url: ARGV[2],
         master_playlist_name: ARGV[3],
         playwright_cli_path: ARGV[4],
-        video_referer: ARGV[5]
+        video_referer: ARGV[5],
+        ts_seg_pattern: ARGV[6]
       )
     end
 
@@ -92,7 +97,11 @@ module Vidload::Mp2t::Api
     def listen_to_video_starts(request)
       if request.url.start_with?(@hls_url) && request.url.include?(@master_playlist_name)
         puts "Video starts. Starting download..."
-        system(DEMUXER_PATH, request.url, @video_name, @video_referer)
+        run_cmd(DEMUXER_PATH, request.url, @video_name, @video_referer) do |line|
+          if (line.include?("hls @") || line.include?("https @")) && line.match?(/#{@ts_seg_pattern}/i)
+            puts line
+          end
+        end
         puts "✔ Video downloaded successfully! Available in ./#{@video_name}.mp4"
         VIDEO_DOWNLOADED_EVENT_QUEUE << true
       end
@@ -101,6 +110,17 @@ module Vidload::Mp2t::Api
     def navigate_to_url(url, page)
       Downloader.display_with_spinner("Page #{url} loading...") do
         page.goto(url)
+      end
+    end
+
+    def run_cmd(*cmd)
+      Open3.popen2e(*cmd) do |_stdin, stdout_and_stderr, wait_thr|
+        stdout_and_stderr.each_line do |line|
+          yield line
+        end
+
+        exit_status = wait_thr.value
+        puts "Command exited with status #{exit_status.exitstatus}"
       end
     end
   end
