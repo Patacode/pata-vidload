@@ -7,3 +7,4 @@
 - [x] add git push at the end of release script
 - [x] setup rake
 - [ ] add a Gemfile
+- [ ] add task to manage TODO.md commit
