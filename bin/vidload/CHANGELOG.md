@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- new step in typical workflow described in README.md around TODO.md
+- new steps in typical workflow described in README.md around TODO.md
 
 ## [0.1.3] - 12/03/2026
 
