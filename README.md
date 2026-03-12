@@ -32,6 +32,6 @@ From there, you can configure and customize the downloader as you wish
 - [ ] update release.sh script to output its built gems into separate dir
 - [ ] implement cli arg to provide video author name
 - [ ] implement way to auto-name and auto-author a video if no name/author was
-given
+      given
 - [ ] add max waiting time for video download start
 - [ ] add changelog mechanism
