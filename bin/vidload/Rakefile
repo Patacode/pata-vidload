@@ -29,3 +29,8 @@ task :gem_release, [:bump_level] do |t, args|
   args.with_defaults(bump_level: ENV["BUMP_LEVEL"] || "patch")
   sh "./scripts/release.sh #{args[:bump_level]}"
 end
+
+desc "Release current gem version to local"
+task :gem_release_local do
+  sh "./scripts/release-local.sh"
+end
