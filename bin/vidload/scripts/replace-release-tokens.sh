@@ -4,7 +4,7 @@
 readonly A_BUMP_LEVEL="$1"
 
 # constants
-readonly C_NEXT_VERSION="$(./get-next-release-version.sh $A_BUMP_LEVEL)"
+readonly C_NEXT_VERSION="$(./scripts/get-next-release-version.sh $A_BUMP_LEVEL)"
 readonly C_CURRENT_DATE="$(date +%d/%m/%Y)"
 
 # functions
