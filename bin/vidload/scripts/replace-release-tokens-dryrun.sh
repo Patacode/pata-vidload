@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ -n "$(git status --porcelain)" ]]; then
-    echo "Uncommitted changes found. Please commit or stash. Aborting."
-    exit 1
-fi
-
 # args
 readonly A_BUMP_LEVEL="$1"
 
