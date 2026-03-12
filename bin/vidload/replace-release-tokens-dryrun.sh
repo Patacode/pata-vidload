@@ -6,6 +6,9 @@ readonly A_BUMP_LEVEL="$1"
 # constants
 readonly C_NEXT_VERSION="$(./get-next-release-version.sh $A_BUMP_LEVEL)"
 readonly C_CURRENT_DATE="$(date +%d/%m/%Y)"
+readonly C_ANSI_BOLD_LIGHT_GREEN="\033[1;92m"
+readonly C_ANSI_BOLD_LIGHT_RED="\033[1;91m"
+readonly C_ANSI_RESET="\033[0m"
 
 # functions
 print_custom_txt() {
@@ -32,10 +35,10 @@ replace_release_tokens() {
 for file in "${@:2}"; do
     cat $file >".tmp"
     print_custom_txt "Replacement in $file file"
-    echo ">>>>>>>>>> Before"
+    echo "$C_ANSI_BOLD_LIGHT_RED>>>>>>>>>> Before$C_ANSI_RESET"
     cat .tmp
     replace_release_tokens .tmp
-    echo "<<<<<<<<<< After"
+    echo "$C_ANSI_BOLD_LIGHT_GREEN<<<<<<<<<< After$C_ANSI_RESET"
     cat .tmp
 done
 
