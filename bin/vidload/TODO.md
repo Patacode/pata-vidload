@@ -17,7 +17,7 @@
 - [x] create task to release
 - [x] add git push at the end of release script
 - [x] setup rake
-- [ ] add a Gemfile
+- [x] add a Gemfile
 - [x] add task to manage TODO.md commit
 - [x] fix exit status bug in release scripts
 - [ ] add task to release gem locally for dev purpose
