@@ -21,4 +21,19 @@ bundle install
 rake setup_playwright
 ```
 
-From there, you can configure and customize the downloader as you wish
+From there, you can configure and customize the downloader as you wish.
+
+## usage
+
+To make use of mp2t downloader:
+
+```ruby
+require "vidload"
+
+mp2t_downloader = Vidload::Mp2t::Api::Downloader.from_argv
+mp2t_downloader.display_calling_args
+
+# the below optionally takes 'video_starter_callbacks' named arg to customize
+# the actions needed to be done to start the video
+mp2t_downloader.download_video
+```
