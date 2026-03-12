@@ -6,6 +6,10 @@ require "open3"
 module Vidload::Mp2t::Api
   DEMUXER_PATH = "#{__dir__}/remuxer.sh"
   VIDEO_DOWNLOADED_EVENT_QUEUE = Queue.new
+  ANSI_BOLD_WHITE="\033[1;97m"
+  ANSI_LIGHT_GREY="\033[37m"
+  ANSI_RESET="\033[0m"
+  MAX_LINES=12
 
   class Downloader
     attr_reader :video_url, :video_name, :hls_url, :master_playlist_name, :playwright_cli_path, :video_referer
@@ -95,11 +99,14 @@ module Vidload::Mp2t::Api
     end
 
     def listen_to_video_starts(request)
+      @lines = []
       if request.url.start_with?(@hls_url) && request.url.include?(@master_playlist_name)
         puts "Video starts. Starting download..."
         run_cmd(DEMUXER_PATH, request.url, @video_name, @video_referer) do |line|
           if (line.include?("hls @") || line.include?("https @")) && line.match?(/#{@ts_seg_pattern}/i)
-            puts line
+            seg = line.match(/#{@ts_seg_pattern}/i)[0]
+            output_line = "Opening segment #{seg} for reading"
+            add_line(output_line)
           end
         end
         puts "✔ Video downloaded successfully! Available in ./#{@video_name}.mp4"
@@ -122,6 +129,24 @@ module Vidload::Mp2t::Api
         exit_status = wait_thr.value
         puts "Command exited with status #{exit_status.exitstatus}"
       end
+    end
+
+    def redraw_lines()
+      return if @lines.empty?
+
+      # move cursor up to redraw previous block
+      printf "\e[H"
+      printf "\e[0J"
+
+      @lines.each do |line|
+        puts line
+      end
+    end
+
+    def add_line(line)
+      @lines << line
+      @lines.shift if @lines.size > MAX_LINES
+      redraw_lines()
     end
   end
 end
