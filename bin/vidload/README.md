@@ -26,3 +26,11 @@ Typical workflow:
 9. trigger a release dryrun via `./scripts/release-dryrun.sh` giving a dump
    level (i.e. patch|minor|major)
 10. trigger a concrete release via `./scripts/release.sh` giving same dump level
+
+```bash
+rake todo_task # optional
+rake changelog
+rake todo
+rake gem_release_dryrun # optional bump_level, from $BUMP_LEVEL or task arg, default to patch
+rake gem_release
+```
