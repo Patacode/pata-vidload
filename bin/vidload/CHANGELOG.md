@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [__GEM_VER__] - __CUR_DT__
+
 ### Fixed
 
 - Closing quote (') in git commit command of `todo_task` rake task (causing
