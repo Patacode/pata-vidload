@@ -9,7 +9,7 @@ fi
 readonly A_BUMP_LEVEL="$1"
 
 # constants
-readonly C_NEXT_VERSION="$(./get-next-release-version.sh $A_BUMP_LEVEL)"
+readonly C_NEXT_VERSION="$(./scripts/get-next-release-version.sh $A_BUMP_LEVEL)"
 readonly C_CURRENT_DATE="$(date +%d/%m/%Y)"
 readonly C_ANSI_BOLD_LIGHT_GREEN='\033[1;92m'
 readonly C_ANSI_BOLD_LIGHT_RED='\033[1;91m'
