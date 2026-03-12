@@ -4,4 +4,4 @@
 - [x] add Gemfile
 - [x] add Rakefile
 - [x] update setup instructions in README.md
-- [ ] make use of Gemfile and Rakefile in web/
+- [x] make use of Gemfile and Rakefile in web/
