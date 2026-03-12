@@ -18,7 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- exit status of release.sh and release-dryrun.sh is now consistent
+- exit status of release-dryrun.sh is now consistent (was always 1, now 0 in
+  case of success and 0 otherwise)
 
 ## [0.1.3] - 12/03/2026
 
