@@ -20,5 +20,5 @@
 - [x] add a Gemfile
 - [x] add task to manage TODO.md commit
 - [x] fix exit status bug in release scripts
-- [ ] add task to release gem locally for dev purpose
+- [x] add task to release gem locally for dev purpose
 - [x] fix typo in git commit msg cmd in todo_task rake task
