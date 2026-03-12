@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - new steps in typical workflow described in README.md around TODO.md
 
+### Fixed
+
+- exit status of release.sh and release-dryrun.sh is now consistent
+
 ## [0.1.3] - 12/03/2026
 
 ### Changed
