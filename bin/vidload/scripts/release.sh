@@ -9,7 +9,7 @@ fi
 readonly A_BUMP_LEVEL="$1"
 
 ./scripts/preprocess-changelog.sh CHANGELOG.md || exit 1
-git commit -m "chore: preprocess files before release"
+git commit -am "chore: preprocess files before release"
 ./scripts/replace-release-tokens.sh $A_BUMP_LEVEL CHANGELOG.md || exit 1
-git commit -m "chore: replace release tokens"
+git commit -am "chore: replace release tokens"
 gem bump -t -r -v "$A_BUMP_LEVEL" || exit 1
