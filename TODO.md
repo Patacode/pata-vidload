@@ -1,7 +1,7 @@
 # Todo
 
-- [ ] move todos in separate TODO.md file
-- [ ] add Gemfile
-- [ ] add Rakefile
-- [ ] update setup instructions in README.md
+- [x] move todos in separate TODO.md file
+- [x] add Gemfile
+- [x] add Rakefile
+- [x] update setup instructions in README.md
 - [ ] make use of Gemfile and Rakefile in web/
