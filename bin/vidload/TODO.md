@@ -1,6 +1,6 @@
 # Todo
 
-- [ ] enhance CLIs using thor gem
+- [ ] add binary cli using thor gem
 - [x] setup proper ci/cd to deploy gem locally and on rubygems.org
 - [x] implement loading spinner for loading messages
 - [ ] implement progress bar with segment infos instead of full ffmpeg output
@@ -22,3 +22,6 @@
 - [x] fix exit status bug in release scripts
 - [x] add task to release gem locally for dev purpose
 - [x] fix typo in git commit msg cmd in todo_task rake task
+- [ ] add unit tests and integration tests
+- [ ] add test coverage tools
+- [ ] add mutation coverage tools
