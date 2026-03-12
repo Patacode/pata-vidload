@@ -17,6 +17,7 @@ Typical workflow:
 2. commit changes made to CHANGELOG.md with message "chore(changelog): update
    with changes of next release"
 3. apply changes to source code
-4. trigger a release dryrun via `./scripts/release-dryrun.sh` giving a dump
+4. checkmark related tasks in TODO.md
+5. trigger a release dryrun via `./scripts/release-dryrun.sh` giving a dump
    level (i.e. patch|minor|major)
-5. trigger a concrete release via `./scripts/release.sh` giving same dump level
+6. trigger a concrete release via `./scripts/release.sh` giving same dump level
