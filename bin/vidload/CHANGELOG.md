@@ -1,6 +1,6 @@
 # Changelogs
 
-## [__GEM_VER__] - __CUR_DT__
+## [unreleased]
 
 ### Added
 
