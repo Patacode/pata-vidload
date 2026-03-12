@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- Gemfile to describe runtime and dev dependencies to be used along bundler
+
 ## [0.1.6] - 12/03/2026
 
 ### Fixed
