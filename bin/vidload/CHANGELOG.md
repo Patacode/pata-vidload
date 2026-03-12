@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Fixed
+
+- Closing quote (') in git commit command of `todo_task` rake task (causing
+  Syntax error, now all is fine)
+
 ## [0.1.5] - 12/03/2026
 
 ### Added
