@@ -4,3 +4,4 @@
 - [ ] create task to manage preparation of changelogs for next release
 - [ ] create task to release dryrun
 - [ ] create task to release
+- [ ] add git push at the end of release script
