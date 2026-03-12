@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- rake tasks to manage TODO.md
+
+### Changed
+
+- new pre-steps in typical workflow around todos
+
 ## [0.1.4] - 12/03/2026
 
 ### Added
