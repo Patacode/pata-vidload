@@ -5,3 +5,4 @@
 - [x] add Rakefile
 - [x] update setup instructions in README.md
 - [x] make use of Gemfile and Rakefile in web/
+- [ ] add example of usage in README.md
