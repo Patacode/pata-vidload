@@ -17,7 +17,7 @@ package-lock.json
 # miscellaneous
 usb_store/
 web/**
-!web/setup.sh
 !web/Gemfile
+!web/Rakefile
 downloads/
 gems/
