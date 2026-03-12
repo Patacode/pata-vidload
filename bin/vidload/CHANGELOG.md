@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Changed
+
+- Progress bar during remuxing and reduced output
+
 ## [0.1.8] - 12/03/2026
 
 ### Added
