@@ -8,4 +8,4 @@
 - [x] setup rake
 - [ ] add a Gemfile
 - [ ] add task to manage TODO.md commit
-- [ ] fix exit status bug in release scripts
+- [x] fix exit status bug in release scripts
