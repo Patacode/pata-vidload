@@ -15,5 +15,5 @@ end
 desc "Release new gem version"
 task :gem_release, [:bump_level] do |t, args|
   args.with_defaults(bump_level: ENV["BUMP_LEVEL"] || "patch")
-  sh "./scripts/release-dryrun.sh #{args[:bump_level]}"
+  sh "./scripts/release.sh #{args[:bump_level]}"
 end
