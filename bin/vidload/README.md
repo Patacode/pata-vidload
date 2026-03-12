@@ -18,6 +18,8 @@ Typical workflow:
    with changes of next release"
 3. apply changes to source code
 4. checkmark related tasks in TODO.md
-5. trigger a release dryrun via `./scripts/release-dryrun.sh` giving a dump
+5. commit changes made to TODO.md with message "chore(todo): checkmark achieved
+   tasks"
+6. trigger a release dryrun via `./scripts/release-dryrun.sh` giving a dump
    level (i.e. patch|minor|major)
-6. trigger a concrete release via `./scripts/release.sh` giving same dump level
+7. trigger a concrete release via `./scripts/release.sh` giving same dump level
