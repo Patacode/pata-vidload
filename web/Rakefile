@@ -1,0 +1,5 @@
+desc "Install playwright drivers using npm"
+task :setup_playwright do
+  sh "npm install playwright"
+  sh "./node_modules/.bin/playwright install"
+end
