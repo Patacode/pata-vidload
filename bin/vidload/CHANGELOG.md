@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- rake to manage project tasks
+- some basic common rake tasks
+
+### Changed
+
+- new step in typical workflow described in README.md around TODO.md
+
 ## [0.1.3] - 12/03/2026
 
 ### Changed
