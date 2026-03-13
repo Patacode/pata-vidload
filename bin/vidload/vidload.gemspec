@@ -5,6 +5,7 @@ require_relative 'lib/vidload'
 Gem::Specification.new do |s|
   s.name        = 'vidload'
   s.version     = Vidload::VERSION
+  s.required_ruby_version = '>= 3.3'
   s.authors     = ['Patacode <pata.codegineer@gmail.com>']
   s.summary     = 'Download videos from web to local'
   s.files       = Dir['lib/**/*.rb', 'lib/**/*.sh']

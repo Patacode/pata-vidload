@@ -107,9 +107,8 @@ module Vidload
         end
 
         def listen_to_video_starts(_page, response)
-          unless response.url.start_with?(@kwargs[:video_hub_url]) && response.headers['content-type']&.include?('video/mp4')
-            return
-          end
+          content_type = response.headers['content-type']
+          return unless response.url.start_with?(@kwargs[:video_hub_url]) && content_type&.include?('video/mp4')
 
           body = response.text
           File.open("video-#{@kwargs[:video_name]}.mp4", 'wb') do |f|

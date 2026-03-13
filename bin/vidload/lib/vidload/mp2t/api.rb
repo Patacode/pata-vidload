@@ -9,7 +9,7 @@ require 'io/console'
 module Vidload
   module Mp2t
     module Api
-      DEMUXER_PATH = "#{__dir__}/remuxer.sh"
+      DEMUXER_PATH = "#{__dir__}/remuxer.sh".freeze
       VIDEO_DOWNLOADED_EVENT_QUEUE = Queue.new
       VIDEO_START_DOWNLOAD_EVENT_QUEUE = Queue.new
       VIDEO_INDEX_EVENT_QUEUE = Queue.new
@@ -115,9 +115,9 @@ module Vidload
             manage_video_download(page, *video_starter_callbacks)
 
             if wait_until_video_start_downloading(timeout: 10).nil?
-              puts "Not possible to download video. Restarting new session"
+              puts 'Not possible to download video. Restarting new session'
               browser.close
-              download_video(video_starter_callbacks:)
+              download_video(video_starter_callbacks: video_starter_callbacks)
             else
               wait_until_video_downloaded
               browser.close
@@ -164,7 +164,7 @@ module Vidload
         end
 
         def wait_until_video_start_downloading(timeout:)
-          VIDEO_START_DOWNLOAD_EVENT_QUEUE.pop(timeout:)
+          VIDEO_START_DOWNLOAD_EVENT_QUEUE.pop(timeout: timeout)
         end
 
         def trigger_video_download(video_url, seg_qty)
@@ -221,11 +221,7 @@ module Vidload
 
           _rows, cols = IO.console.winsize
           @lines.each do |line|
-            if line.length > cols
-              puts "#{line.slice(0, cols - 3)}..."
-            else
-              puts line
-            end
+            line.length > cols ? (puts "#{line.slice(0, cols - 3)}...") : (puts line)
           end
         end
 
