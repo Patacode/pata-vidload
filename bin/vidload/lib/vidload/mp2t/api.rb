@@ -24,7 +24,8 @@ module Vidload::Mp2t::Api
       playwright_cli_path:,
       video_referer:,
       ts_seg_pattern:,
-      hls_index_pattern:
+      hls_index_pattern:,
+      author_name:
     )
       raise ArgumentError, "video_url must be provided" unless video_url
       raise ArgumentError, "video_name must be provided" unless video_name
@@ -34,9 +35,9 @@ module Vidload::Mp2t::Api
       raise ArgumentError, "video_referer must be provided" unless video_referer
       raise ArgumentError, "ts_seg_pattern must be provided" unless ts_seg_pattern
       raise ArgumentError, "hls_index_pattern must be provided" unless hls_index_pattern
+      raise ArgumentError, "author_name must be provided" unless author_name
 
       @video_url = video_url
-      @video_name = video_name
       @hls_url = hls_url
       @master_playlist_name = master_playlist_name
       @playwright_cli_path = playwright_cli_path
@@ -44,6 +45,8 @@ module Vidload::Mp2t::Api
       @ts_seg_pattern = ts_seg_pattern
       @hls_index_pattern = hls_index_pattern
       @max_lines = IO.console.winsize[0]
+      @author_name = author_name
+      @video_name = "#{@author_name}_#{video_name}"
     end
 
     def self.from_argv
@@ -56,6 +59,7 @@ module Vidload::Mp2t::Api
         video_referer: ARGV[5],
         ts_seg_pattern: ARGV[6],
         hls_index_pattern: ARGV[7],
+        author_name: ARGV[8],
       )
     end
 
