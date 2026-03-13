@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- support to download multiple videos in one command
+- option to create a site index or update an existing one
+
 ## [0.5.3] - 14/03/2026
 
 ### Changed
