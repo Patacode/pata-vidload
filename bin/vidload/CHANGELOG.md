@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Fixed
+
+- output_dir option of mp2t downloader
+
 ## [0.3.3] - 13/03/2026
 
 ### Added
