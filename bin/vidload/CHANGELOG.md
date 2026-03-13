@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- code formatting using rubocop gem
+- rake task to format code with rubocop
+
+### Changed
+
+- workflow updated with code formatting step
+
 ## [0.2.0] - 13/03/2026
 
 ### Added
