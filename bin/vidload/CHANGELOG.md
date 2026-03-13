@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Fixed
+
+- loading messages with proper animation in mp2t downloader
+
 ## [0.3.2] - 13/03/2026
 
 ### Fixed
