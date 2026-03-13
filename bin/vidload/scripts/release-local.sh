@@ -2,7 +2,7 @@
 
 # functions
 get_current_version() {
-    cat lib/vidload/version.rb | sed -n '2p' | awk '{print $NF}' | tr -d '"'
+    cat lib/vidload/version.rb | sed -n '4p' | awk '{print $NF}' | tr -d "'"
 }
 
 # constants
