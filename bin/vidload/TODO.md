@@ -40,4 +40,4 @@
 - [x] implement mp4 downloader
 - [x] remove usage of terminal-specific attributes in mp4 downloader
 - [ ] fix output_dir option in mp2t downloader
-- [ ] fix loading messages in mp4 downloader
+- [x] fix loading messages in mp4 downloader
