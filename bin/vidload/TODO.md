@@ -29,9 +29,10 @@
 - [x] add possibility to create Vidload::Mp2t::Api::Downloader from thor options
 - [ ] add documentation
 - [ ] prettify calling args details output
-- [ ] add code formatter
+- [x] add code formatter
 - [ ] add core linter
-- [ ] add rake tasks for formatting and linting
+- [x] add rake task for formatting
+- [ ] add rake task for linting
 - [ ] add support to download multiple videos
 - [ ] add support to group videos by author in separate directories
 - [ ] add option to run in non-headless
