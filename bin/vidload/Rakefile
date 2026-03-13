@@ -1,36 +1,38 @@
-require "bundler/gem_tasks"
+# frozen_string_literal: true
 
-desc "Prepare changelogs for next release"
+require 'bundler/gem_tasks'
+
+desc 'Prepare changelogs for next release'
 task :changelog do
-  sh "git add CHANGELOG.md"
+  sh 'git add CHANGELOG.md'
   sh "git commit -m 'chore(changelog): update with changes of next release'"
 end
 
-desc "Prepare todo for next release"
+desc 'Prepare todo for next release'
 task :todo do
-  sh "git add TODO.md"
+  sh 'git add TODO.md'
   sh "git commit -m 'chore(todo): checkmark achieved tasks'"
 end
 
-desc "Add/Update tasks in TODO.md"
+desc 'Add/Update tasks in TODO.md'
 task :todo_task do
-  sh "git add TODO.md"
+  sh 'git add TODO.md'
   sh "git commit -m 'chore(todo): add/update tasks'"
 end
 
-desc "Dryrun release of new gem version"
-task :gem_release_dryrun, [:bump_level] do |t, args|
-  args.with_defaults(bump_level: ENV["BUMP_LEVEL"] || "patch")
+desc 'Dryrun release of new gem version'
+task :gem_release_dryrun, [:bump_level] do |_t, args|
+  args.with_defaults(bump_level: ENV['BUMP_LEVEL'] || 'patch')
   sh "./scripts/release-dryrun.sh #{args[:bump_level]}"
 end
 
-desc "Release new gem version"
-task :gem_release, [:bump_level] do |t, args|
-  args.with_defaults(bump_level: ENV["BUMP_LEVEL"] || "patch")
+desc 'Release new gem version'
+task :gem_release, [:bump_level] do |_t, args|
+  args.with_defaults(bump_level: ENV['BUMP_LEVEL'] || 'patch')
   sh "./scripts/release.sh #{args[:bump_level]}"
 end
 
-desc "Release current gem version to local"
+desc 'Release current gem version to local'
 task :gem_release_local do
-  sh "./scripts/release-local.sh"
+  sh './scripts/release-local.sh'
 end
