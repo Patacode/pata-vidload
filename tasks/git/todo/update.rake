@@ -1,4 +1,4 @@
-namespace :todo do
+namespace "git:todo" do
   desc 'Add/Update tasks in TODO.md'
   task :update do
     sh 'git add TODO.md'

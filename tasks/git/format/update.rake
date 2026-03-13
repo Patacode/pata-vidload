@@ -1,4 +1,4 @@
-namespace :format do
+namespace "git:format" do
   desc 'Save code formatting/refactoring'
   task :update do
     sh 'git add .'
