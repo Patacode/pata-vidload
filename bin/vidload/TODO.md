@@ -4,7 +4,6 @@
 - [x] setup proper ci/cd to deploy gem locally and on rubygems.org
 - [x] implement loading spinner for loading messages
 - [x] implement progress bar with segment infos instead of full ffmpeg output
-- [ ] extend list of supported video downloaders
 - [x] add cli arg to output .mp4 video into some custom dir
 - [x] implement cli arg to provide video author name
 - [x] implement way to auto-name and auto-author a video if no name/author was
@@ -53,3 +52,4 @@
 - [ ] implement check to verify if video already downloaded
 - [x] improve rake tasks structure
 - [x] fix case conversion issue
+- [ ] implement site map/index
