@@ -26,3 +26,4 @@
 - [ ] add test coverage tools
 - [ ] add mutation coverage tools
 - [ ] resolve all gem build warnings
+- [ ] add possibility to create Vidload::Mp2t::Api::Downloader from thor options
