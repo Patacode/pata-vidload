@@ -35,3 +35,4 @@
 - [ ] add support to download multiple videos
 - [ ] add support to group videos by author in separate directories
 - [ ] add option to run in non-headless
+- [ ] provide useful default value for non-required args
