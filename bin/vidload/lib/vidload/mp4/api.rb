@@ -54,7 +54,6 @@ module Vidload
 
       class Downloader
         def initialize(**kwargs)
-          @max_lines = IO.console.winsize[0]
           @kwargs = kwargs
         end
 
@@ -96,7 +95,6 @@ module Vidload
         private
 
         def manage_video_download(page)
-          @lines = [''] * @max_lines
           page.on('response', ->(resp) { listen_to_video_starts(page, resp) })
           navigate_to_url(@kwargs[:video_url], page)
         end
