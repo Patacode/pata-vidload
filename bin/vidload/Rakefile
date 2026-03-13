@@ -22,7 +22,9 @@ end
 
 desc 'Format code using rubocop'
 task :format do
-  sh 'bundle exec rubocop'
+  sh 'bundle exec rubocop -A'
+  sh 'git add .'
+  sh 'git commit -m "format(rubocop): apply suggested corrections"'
 end
 
 desc 'Dryrun release of new gem version'
