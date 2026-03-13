@@ -51,7 +51,7 @@ module Vidload
           self
         end
 
-        def is_non_headless(non_headless)
+        def non_headless?(non_headless)
           @kwargs[:non_headless] = non_headless
           self
         end
