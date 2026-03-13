@@ -42,3 +42,6 @@
 - [x] fix output_dir option in mp2t downloader
 - [x] fix loading messages in mp4 downloader
 - [x] add rake task to save rubocop changes
+- [ ] shorten output of token replacement script
+- [ ] create TUI to run rake tasks with mouse click in terminal
+- [ ] remove all non-alphabetic chars except spaces from auto-naming feature of mp2t downloader
