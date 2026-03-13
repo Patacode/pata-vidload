@@ -17,8 +17,6 @@ module Vidload
       ANSI_RESET = "\033[0m"
 
       class Downloader
-        attr_reader :video_url, :video_name, :hls_url, :master_playlist_name, :playwright_cli_path, :video_referer
-
         def initialize(
           video_url:,
           video_name:,
