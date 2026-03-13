@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Fixed
+
+- loading messages with proper animation in mp4 downloader (spinner dependency
+  was missing in required section)
+
 ## [0.3.1] - 13/03/2026
 
 ### Removed
