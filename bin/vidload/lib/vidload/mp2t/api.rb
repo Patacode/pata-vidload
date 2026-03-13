@@ -61,6 +61,20 @@ module Vidload::Mp2t::Api
       )
     end
 
+    def self.from_hash(hash)
+      new(
+        video_url: hash[:video_url],
+        author_name: hash[:author_name],
+        video_name: hash[:video_name],
+        hls_url: hash[:hls_url],
+        master_playlist_name: hash[:master_playlist_name],
+        playwright_cli_path: hash[:playwright_cli_path],
+        video_referer: hash[:video_referer],
+        ts_seg_pattern: hash[:ts_seg_pattern],
+        hls_index_pattern: hash[:hls_index_pattern],
+      )
+    end
+
     # main func to be called in your own scripts defined under web/
     def download_video(video_starter_callbacks: [])
       Playwright.create(playwright_cli_executable_path: @playwright_cli_path) do |playwright|
