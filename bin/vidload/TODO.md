@@ -5,7 +5,7 @@
 - [x] implement loading spinner for loading messages
 - [x] implement progress bar with segment infos instead of full ffmpeg output
 - [ ] extend list of supported video downloaders
-- [ ] add cli arg to output .mp4 video into some custom dir
+- [x] add cli arg to output .mp4 video into some custom dir
 - [x] implement cli arg to provide video author name
 - [x] implement way to auto-name and auto-author a video if no name/author was
       given
