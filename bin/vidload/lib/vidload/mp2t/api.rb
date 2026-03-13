@@ -11,6 +11,7 @@ module Vidload
     module Api
       DEMUXER_PATH = "#{__dir__}/remuxer.sh"
       VIDEO_DOWNLOADED_EVENT_QUEUE = Queue.new
+      VIDEO_START_DOWNLOAD_EVENT_QUEUE = Queue.new
       VIDEO_INDEX_EVENT_QUEUE = Queue.new
       ANSI_BOLD_WHITE = "\033[1;97m"
       ANSI_LIGHT_GREY = "\033[37m"
@@ -108,13 +109,19 @@ module Vidload
         # main func to be called in your own scripts defined under web/
         def download_video(video_starter_callbacks: [])
           Playwright.create(playwright_cli_executable_path: @kwargs[:playwright_cli_path]) do |playwright|
-            browser = playwright.chromium.launch
+            browser = playwright.chromium.launch(headless: false)
             page = browser.new_page
 
             manage_video_download(page, *video_starter_callbacks)
-            wait_until_video_downloaded
 
-            browser.close
+            if wait_until_video_start_downloading(timeout: 10).nil?
+              puts "Not possible to download video. Restarting new session"
+              browser.close
+              download_video(video_starter_callbacks:)
+            else
+              wait_until_video_downloaded
+              browser.close
+            end
           end
         end
 
@@ -156,7 +163,12 @@ module Vidload
           VIDEO_DOWNLOADED_EVENT_QUEUE.pop
         end
 
+        def wait_until_video_start_downloading(timeout:)
+          VIDEO_START_DOWNLOAD_EVENT_QUEUE.pop(timeout:)
+        end
+
         def trigger_video_download(video_url, seg_qty)
+          VIDEO_START_DOWNLOAD_EVENT_QUEUE << true
           puts 'Video starts. Starting download...'
           run_cmd(DEMUXER_PATH, video_url, "#{@kwargs[:output_dir]}#{@kwargs[:video_name]}",
                   @kwargs[:video_referer]) do |line|
