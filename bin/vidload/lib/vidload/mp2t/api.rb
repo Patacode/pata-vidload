@@ -56,6 +56,11 @@ module Vidload
           self
         end
 
+        def author_dir?(author_dir)
+          @kwargs[:author_dir] = author_dir
+          self
+        end
+
         def with_hls_url(hls_url)
           @kwargs[:hls_url] = hls_url
           self
@@ -91,7 +96,6 @@ module Vidload
             raise ArgumentError, "#{required_arg} must be provided" unless @kwargs[required_arg]
           end
 
-          @kwargs[:output_dir] = './' unless @kwargs[:output_dir]
           @kwargs[:video_name] = "#{@kwargs[:author_name]}_#{@kwargs[:video_name]}" if @kwargs[:author_name]
 
           Downloader.new(**@kwargs)
@@ -176,8 +180,19 @@ module Vidload
         def trigger_video_download(video_url, seg_qty)
           VIDEO_START_DOWNLOAD_EVENT_QUEUE << true
           puts 'Video starts. Starting download...'
-          FileUtils.mkdir_p(@kwargs[:output_dir], mode: 0o755)
-          run_cmd(DEMUXER_PATH, video_url, "#{@kwargs[:output_dir]}#{@kwargs[:video_name]}",
+          video_parent_dirs = if @kwargs[:author_dir]
+                                if @kwargs[:output_dir]
+                                  "#{@kwargs[:output_dir]}/#{@kwargs[:author_name]}"
+                                else
+                                  @kwargs[:author_name]
+                                end
+                              else
+                                @kwargs[:output_dir]
+                              end
+
+          puts video_parent_dirs
+          FileUtils.mkdir_p(video_parent_dirs, mode: 0o755)
+          run_cmd(DEMUXER_PATH, video_url, "#{video_parent_dirs}/#{@kwargs[:video_name]}",
                   @kwargs[:video_referer]) do |line|
             if (line.include?('hls @') || line.include?('https @')) && line.match?(/#{@kwargs[:ts_seg_pattern]}/i)
               seg_nb = line.match(/#{@kwargs[:ts_seg_pattern]}/i)[:seg_nb]
@@ -186,7 +201,7 @@ module Vidload
             end
           end
           print "\r\e[2K"
-          puts "✔ Video downloaded successfully! Available in #{@kwargs[:output_dir]}#{@kwargs[:video_name]}.mp4"
+          puts "✔ Video downloaded successfully! Available in #{video_parent_dirs}/#{@kwargs[:video_name]}.mp4"
           VIDEO_DOWNLOADED_EVENT_QUEUE << true
         end
 
