@@ -23,9 +23,26 @@ module Vidload
       process_mp2t(params)
     end
 
+    desc 'mp4 VIDEO_URL', 'download a mp4 video'
+    method_option :video_name, type: :string, required: false
+    method_option :video_hub_url, type: :string, required: true
+    method_option :playwright_cli_path, type: :string, required: true
+    def mp4(video_url)
+      params = {
+        video_url: video_url,
+        **options
+      }
+
+      process_mp4(params)
+    end
+
     private
 
     def process_mp2t(params)
+      raise NotImplementedError
+    end
+
+    def process_mp4(params)
       raise NotImplementedError
     end
   end
