@@ -1,3 +1,5 @@
+import File.expand_path("../tasks/Rakefile", __dir__)
+
 desc "Install playwright drivers using npm"
 task :setup_playwright do
   sh "npm install playwright"
