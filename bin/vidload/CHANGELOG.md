@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- thor-based binary for mp2t downloader
+- possibility to create mp2t downloader from thor method options
+
 ## [0.1.10] - 13/03/2026
 
 ### Added
