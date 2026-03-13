@@ -28,14 +28,12 @@ module Vidload::Mp2t::Api
       author_name:
     )
       raise ArgumentError, "video_url must be provided" unless video_url
-      raise ArgumentError, "video_name must be provided" unless video_name
       raise ArgumentError, "hls_url must be provided" unless hls_url
       raise ArgumentError, "master_playlist_name must be provided" unless master_playlist_name
       raise ArgumentError, "playwright_cli_path must be provided" unless playwright_cli_path
       raise ArgumentError, "video_referer must be provided" unless video_referer
       raise ArgumentError, "ts_seg_pattern must be provided" unless ts_seg_pattern
       raise ArgumentError, "hls_index_pattern must be provided" unless hls_index_pattern
-      raise ArgumentError, "author_name must be provided" unless author_name
 
       @video_url = video_url
       @hls_url = hls_url
@@ -46,7 +44,7 @@ module Vidload::Mp2t::Api
       @hls_index_pattern = hls_index_pattern
       @max_lines = IO.console.winsize[0]
       @author_name = author_name
-      @video_name = "#{@author_name}_#{video_name}"
+      @video_name = if @author_name then "#{@author_name}_#{video_name}" else nil end
     end
 
     def self.from_argv
@@ -107,7 +105,14 @@ module Vidload::Mp2t::Api
       page.on("response", -> (resp) { listen_to_video_starts(resp) })
       navigate_to_url(@video_url, page)
       video_starter_callbacks.each do |callback|
-        callback.call(page)
+        res = callback.call(page)
+        if !@video_name && res[:video_name]
+          @video_name = res[:video_name]
+        end
+        if !@author_name && res[:author_name]
+          @author_name = res[:author_name]
+          @video_name = "#{@author_name}_#{@video_name}"
+        end
       end
     end
 
