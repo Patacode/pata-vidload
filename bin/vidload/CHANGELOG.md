@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Changed
+
+- flag option 'non-headless' now renamed 'headless' and used as inverse
+
 ## [0.5.2] - 13/03/2026
 
 ### Changed
