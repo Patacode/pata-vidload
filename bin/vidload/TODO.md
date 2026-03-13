@@ -26,4 +26,12 @@
 - [ ] add test coverage tools
 - [ ] add mutation coverage tools
 - [ ] resolve all gem build warnings
-- [ ] add possibility to create Vidload::Mp2t::Api::Downloader from thor options
+- [x] add possibility to create Vidload::Mp2t::Api::Downloader from thor options
+- [ ] add documentation
+- [ ] prettify calling args details output
+- [ ] add code formatter
+- [ ] add core linter
+- [ ] add rake tasks for formatting and linting
+- [ ] add support to download multiple videos
+- [ ] add support to group videos by author in separate directories
+- [ ] add option to run in non-headless
