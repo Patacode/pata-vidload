@@ -102,19 +102,21 @@ module Vidload
         end
 
         def wait_until_video_downloaded
-          Downloader.display_with_spinner("Downloading mp4 video...") do
+          Downloader.display_with_spinner('Downloading mp4 video...') do
             VIDEO_DOWNLOADED_EVENT_QUEUE.pop
           end
         end
 
-        def listen_to_video_starts(page, response)
-          if response.url.start_with?(@kwargs[:video_hub_url]) && response.headers["content-type"]&.include?("video/mp4")
-            body = response.text
-            File.open("video-#{@kwargs[:video_name]}.mp4", "wb") do |f|
-              f.write(body)
-            end
-            VIDEO_DOWNLOADED_EVENT_QUEUE << true
+        def listen_to_video_starts(_page, response)
+          unless response.url.start_with?(@kwargs[:video_hub_url]) && response.headers['content-type']&.include?('video/mp4')
+            return
           end
+
+          body = response.text
+          File.open("video-#{@kwargs[:video_name]}.mp4", 'wb') do |f|
+            f.write(body)
+          end
+          VIDEO_DOWNLOADED_EVENT_QUEUE << true
         end
 
         def navigate_to_url(url, page)

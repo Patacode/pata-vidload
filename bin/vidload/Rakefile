@@ -20,9 +20,9 @@ task :todo_task do
   sh "git commit -m 'chore(todo): add/update tasks'"
 end
 
-desc "Format code using rubocop"
+desc 'Format code using rubocop'
 task :format do
-  sh "bundle exec rubocop"
+  sh 'bundle exec rubocop'
 end
 
 desc 'Dryrun release of new gem version'
