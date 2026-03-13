@@ -1,6 +1,6 @@
 # Todo
 
-- [ ] add binary cli using thor gem
+- [x] add binary cli using thor gem
 - [x] setup proper ci/cd to deploy gem locally and on rubygems.org
 - [x] implement loading spinner for loading messages
 - [x] implement progress bar with segment infos instead of full ffmpeg output
