@@ -6,8 +6,8 @@
 - [x] implement progress bar with segment infos instead of full ffmpeg output
 - [ ] extend list of supported video downloaders
 - [ ] add cli arg to output .mp4 video into some custom dir
-- [ ] implement cli arg to provide video author name
-- [ ] implement way to auto-name and auto-author a video if no name/author was
+- [x] implement cli arg to provide video author name
+- [x] implement way to auto-name and auto-author a video if no name/author was
       given
 - [ ] fix bug infinite download hang
 - [x] add changelog mechanism
