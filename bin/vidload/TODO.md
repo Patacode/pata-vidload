@@ -34,7 +34,7 @@
 - [x] add rake task for formatting
 - [ ] add rake task for linting
 - [ ] add support to download multiple videos
-- [ ] add support to group videos by author in separate directories
+- [x] add support to group videos by author in separate directories
 - [x] add option to run in non-headless
 - [ ] provide useful default value for non-required args
 - [x] implement mp4 downloader
