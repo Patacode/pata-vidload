@@ -47,3 +47,4 @@
 - [ ] remove all non-alphabetic chars except spaces from auto-naming feature of mp2t downloader
 - [ ] adjust default value logic around video_name arg
 - [ ] add loading animation to loading messages without animation
+- [ ] fix mp2t segment output display issue
