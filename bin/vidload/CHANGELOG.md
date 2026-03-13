@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- new flag option to create video file in a directory named with author name
+
 ## [0.4.0] - 13/03/2026
 
 ### Added
