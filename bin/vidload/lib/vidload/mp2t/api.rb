@@ -162,14 +162,15 @@ module Vidload
           navigate_to_url(@kwargs[:video_url], page)
           video_starter_callbacks.each do |callback|
             res = callback.call(page)
-            @kwargs[:video_name] = !@kwargs[:video_name] && res[:video_name] ? res[:video_name] : 'unknown_name'
+            if !@kwargs[:video_name] && res[:video_name]
+              @kwargs[:video_name] = res[:video_name]
+              @kwargs[:video_name] = LuckyCase.dash_case(@kwargs[:video_name].gsub(/[^[:alnum:] ]/, ''))
+            end
             if !@kwargs[:author_name] && res[:author_name]
               @kwargs[:author_name] = res[:author_name]
+              @kwargs[:author_name] = LuckyCase.dash_case(@kwargs[:author_name].gsub(/[^[:alnum:] ]/, ''))
               @kwargs[:video_name] = "#{@kwargs[:author_name]}_#{@kwargs[:video_name]}"
             end
-
-            @kwargs[:video_name] = LuckyCase.dash_case(@kwargs[:video_name].gsub(/[^[:alnum:] ]/, ''))
-            @kwargs[:author_name] = LuckyCase.dash_case(@kwargs[:author_name].gsub(/[^[:alnum:] ]/, ''))
           end
         end
 
