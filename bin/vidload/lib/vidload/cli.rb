@@ -8,6 +8,7 @@ module Vidload
     method_option :video_name, type: :string, required: false
     method_option :author_name, type: :string, required: false
     method_option :output_dir, type: :string, required: false
+    method_option :headless, type: :boolean, default: true 
     method_option :hls_url, type: :string, required: true
     method_option :master_playlist_name, type: :string, required: true
     method_option :playwright_cli_path, type: :string, required: true
