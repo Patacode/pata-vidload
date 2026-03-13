@@ -25,3 +25,4 @@
 - [ ] add unit tests and integration tests
 - [ ] add test coverage tools
 - [ ] add mutation coverage tools
+- [ ] resolve all gem build warnings
