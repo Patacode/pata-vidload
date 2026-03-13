@@ -20,6 +20,11 @@ task :todo_task do
   sh "git commit -m 'chore(todo): add/update tasks'"
 end
 
+desc "Format code using rubocop"
+task :format do
+  sh "bundle exec rubocop"
+end
+
 desc 'Dryrun release of new gem version'
 task :gem_release_dryrun, [:bump_level] do |_t, args|
   args.with_defaults(bump_level: ENV['BUMP_LEVEL'] || 'patch')
