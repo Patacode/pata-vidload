@@ -38,4 +38,4 @@
 - [ ] add option to run in non-headless
 - [ ] provide useful default value for non-required args
 - [x] implement mp4 downloader
-- [ ] remove usage of terminal-specific attributes in mp4 downloader
+- [x] remove usage of terminal-specific attributes in mp4 downloader
