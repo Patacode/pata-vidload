@@ -5,7 +5,7 @@ require 'tty-spinner'
 require 'open3'
 require 'm3u8'
 require 'io/console'
-require "fileutils"
+require 'fileutils'
 
 module Vidload
   module Mp2t
