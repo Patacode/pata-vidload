@@ -86,6 +86,9 @@ module Vidload::Mp2t::Api
       puts "\tmaster_playlist_name=#{@master_playlist_name}"
       puts "\tplaywright_cli_path=#{@playwright_cli_path}"
       puts "\tvideo_referer=#{@video_referer}"
+      puts "\tts_seg_pattern=#{@ts_seg_pattern}"
+      puts "\thls_index_pattern=#{@hls_index_pattern}"
+      puts "\tauthor_name=#{@author_name}"
     end
 
     def self.display_with_spinner(loading_msg = "Loading...")
