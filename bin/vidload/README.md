@@ -29,10 +29,11 @@ Typical workflow:
 11. trigger a concrete release via `./scripts/release.sh` giving same dump level
 
 ```bash
-rake todo_task # optional
-rake changelog
+rake todo_task # optional, can be executed at anytime
+rake changelog # can be executed at anytime
 rake format
+rake format_save # required only if uncommitted changes coming from 'format' step
 rake todo
 rake gem_release_dryrun # optional bump_level, from $BUMP_LEVEL or task arg, default to patch
-rake gem_release # same as dryrun
+rake gem_release # same remark as dryrun
 ```
