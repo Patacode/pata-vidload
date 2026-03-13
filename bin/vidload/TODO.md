@@ -35,7 +35,7 @@
 - [ ] add rake task for linting
 - [ ] add support to download multiple videos
 - [ ] add support to group videos by author in separate directories
-- [ ] add option to run in non-headless
+- [x] add option to run in non-headless
 - [ ] provide useful default value for non-required args
 - [x] implement mp4 downloader
 - [x] remove usage of terminal-specific attributes in mp4 downloader
