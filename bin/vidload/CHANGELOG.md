@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [__GEM_VER__] - __CUR_DT__
+
 ### Changed
 
 - auto-naming feature in mp2t downloader remove all non-alphabetic chars except
