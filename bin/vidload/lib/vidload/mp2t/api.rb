@@ -5,6 +5,7 @@ require 'tty-spinner'
 require 'open3'
 require 'm3u8'
 require 'io/console'
+require "fileutils"
 
 module Vidload
   module Mp2t
@@ -170,6 +171,7 @@ module Vidload
         def trigger_video_download(video_url, seg_qty)
           VIDEO_START_DOWNLOAD_EVENT_QUEUE << true
           puts 'Video starts. Starting download...'
+          FileUtils.mkdir_p(@kwargs[:output_dir], mode: 0o755)
           run_cmd(DEMUXER_PATH, video_url, "#{@kwargs[:output_dir]}#{@kwargs[:video_name]}",
                   @kwargs[:video_referer]) do |line|
             if (line.include?('hls @') || line.include?('https @')) && line.match?(/#{@kwargs[:ts_seg_pattern]}/i)
