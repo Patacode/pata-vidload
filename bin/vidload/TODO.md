@@ -3,7 +3,7 @@
 - [ ] add binary cli using thor gem
 - [x] setup proper ci/cd to deploy gem locally and on rubygems.org
 - [x] implement loading spinner for loading messages
-- [ ] implement progress bar with segment infos instead of full ffmpeg output
+- [x] implement progress bar with segment infos instead of full ffmpeg output
 - [ ] extend list of supported video downloaders
 - [ ] add cli arg to output .mp4 video into some custom dir
 - [ ] implement cli arg to provide video author name
