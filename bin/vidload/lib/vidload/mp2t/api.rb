@@ -16,38 +16,77 @@ module Vidload
       ANSI_LIGHT_GREY = "\033[37m"
       ANSI_RESET = "\033[0m"
 
-      class Downloader
-        def initialize(
-          video_url:,
-          video_name:,
-          author_name:,
-          hls_url:,
-          master_playlist_name:,
-          playwright_cli_path:,
-          video_referer:,
-          ts_seg_pattern:,
-          hls_index_pattern:,
-          output_dir:
-        )
-          raise ArgumentError, 'video_url must be provided' unless video_url
-          raise ArgumentError, 'hls_url must be provided' unless hls_url
-          raise ArgumentError, 'master_playlist_name must be provided' unless master_playlist_name
-          raise ArgumentError, 'playwright_cli_path must be provided' unless playwright_cli_path
-          raise ArgumentError, 'video_referer must be provided' unless video_referer
-          raise ArgumentError, 'ts_seg_pattern must be provided' unless ts_seg_pattern
-          raise ArgumentError, 'hls_index_pattern must be provided' unless hls_index_pattern
+      class DownloaderBuilder
+        def initialize
+          @kwargs = {}
+        end
 
-          @video_url = video_url
-          @hls_url = hls_url
-          @master_playlist_name = master_playlist_name
-          @playwright_cli_path = playwright_cli_path
-          @video_referer = video_referer
-          @ts_seg_pattern = ts_seg_pattern
-          @hls_index_pattern = hls_index_pattern
+        def with_video_url(video_url)
+          @kwargs[:video_url] = video_url
+        end
+
+        def with_video_name(video_name)
+          @kwargs[:video_name] = @kwargs[:author_name] ? "#{@kwargs[:author_name]}_#{video_name}" : nil
+        end
+
+        def with_author_name(author_name)
+          @kwargs[:author_name] = author_name
+        end
+
+        def with_hls_url(hls_url)
+          @kwargs[:hls_url] = hls_url
+        end
+
+        def with_master_playlist_name(master_playlist_name)
+          @kwargs[:master_playlist_name] = master_playlist_name
+        end
+
+        def with_playwright_cli_path(playwright_cli_path)
+          @kwargs[:playwright_cli_path] = playwright_cli_path
+        end
+
+        def with_video_referer(video_referer)
+          @kwargs[:video_referer] = video_referer
+        end
+
+        def with_ts_seg_pattern(ts_seg_pattern)
+          @kwargs[:ts_seg_pattern] = ts_seg_pattern
+        end
+
+        def with_hls_index_pattern(hls_index_pattern)
+          @kwargs[:hls_index_pattern] = hls_index_pattern
+        end
+
+        def with_output_dir(output_dir)
+          @kwargs[:output_dir] = output_dir || './'
+        end
+
+        def build
+          raise ArgumentError, 'video_url must be provided' unless @kwargs[:video_url]
+          raise ArgumentError, 'hls_url must be provided' unless @kwargs[:hls_url]
+          raise ArgumentError, 'master_playlist_name must be provided' unless @kwargs[:master_playlist_name]
+          raise ArgumentError, 'playwright_cli_path must be provided' unless @kwargs[:playwright_cli_path]
+          raise ArgumentError, 'video_referer must be provided' unless @kwargs[:video_referer]
+          raise ArgumentError, 'ts_seg_pattern must be provided' unless @kwargs[:ts_seg_pattern]
+          raise ArgumentError, 'hls_index_pattern must be provided' unless @kwargs[:hls_index_pattern]
+
+          Downloader.new(**@kwargs)
+        end
+      end
+
+      class Downloader
+        def initialize(**kwargs)
           @max_lines = IO.console.winsize[0]
-          @author_name = author_name
-          @video_name = @author_name ? "#{@author_name}_#{video_name}" : nil
-          @output_dir = output_dir || './'
+          @video_url = kwargs[:video_url]
+          @hls_url = kwargs[:hls_url]
+          @master_playlist_name = kwargs[:master_playlist_name]
+          @playwright_cli_path = kwargs[:playwright_cli_path]
+          @video_referer = kwargs[:video_referer]
+          @ts_seg_pattern = kwargs[:ts_seg_pattern]
+          @hls_index_pattern = kwargs[:hls_index_pattern]
+          @author_name = kwargs[:author_name]
+          @video_name = kwargs[:video_name]
+          @output_dir = kwargs[:output_dir]
         end
 
         def self.from_argv
