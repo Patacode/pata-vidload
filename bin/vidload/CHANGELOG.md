@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- option to output video in custom dir
+- option to group videos by authors in separate directory
+
 ## [0.1.11] - 13/03/2026
 
 ### Added
