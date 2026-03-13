@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'playwright'
+require 'tty-spinner'
 require 'open3'
 require 'io/console'
 
