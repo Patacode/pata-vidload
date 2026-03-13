@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- flag option to run in non-headless mode
+
 ## [0.3.4] - 13/03/2026
 
 ### Fixed
