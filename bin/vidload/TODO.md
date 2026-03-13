@@ -50,3 +50,4 @@
 - [ ] fix mp2t segment output display issue
 - [ ] rename non-headless flag to headless
 - [ ] split downloader CLIs into separate class
+- [ ] implement check to verify if video already downloaded
