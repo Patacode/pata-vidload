@@ -17,15 +17,7 @@ module Vidload
     def mp2t(video_url)
       params = {
         video_url: video_url,
-        video_name: options[:video_name],
-        hls_url: options[:hls_url],
-        master_playlist_name: options[:master_playlist_name],
-        playwright_cli_path: options[:playwright_cli_path],
-        video_referer: options[:video_referer],
-        ts_seg_pattern: options[:ts_seg_pattern],
-        hls_index_pattern: options[:hls_index_pattern],
-        author_name: options[:author_name],
-        output_dir: options[:output_dir]
+        **options
       }
 
       process_mp2t(params)
