@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- cli arg to provide video author name
+
+### Changed
+
+- auto naming for video author and title if not provided
+
 ## [0.1.9] - 13/03/2026
 
 ### Changed
