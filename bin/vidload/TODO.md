@@ -51,4 +51,5 @@
 - [ ] rename non-headless flag to headless
 - [ ] split downloader CLIs into separate class
 - [ ] implement check to verify if video already downloaded
-- [ ] improve rake tasks structure
+- [x] improve rake tasks structure
+- [x] fix case conversion issue
