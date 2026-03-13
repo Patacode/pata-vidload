@@ -48,3 +48,5 @@
 - [ ] adjust default value logic around video_name arg
 - [ ] add loading animation to loading messages without animation
 - [ ] fix mp2t segment output display issue
+- [ ] rename non-headless flag to headless
+- [ ] split downloader CLIs into separate class
