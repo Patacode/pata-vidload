@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- loading messages with proper animation in mp2t downloader
+- infinite download hang when using mp2t
 
 ## [0.3.2] - 13/03/2026
 
