@@ -27,6 +27,12 @@ task :format do
   sh 'git commit -m "format(rubocop): apply suggested corrections"'
 end
 
+desc 'Save code formatting/refactoring'
+task :format_save do
+  sh 'git add .'
+  sh 'git commit -m "format(rubocop): apply suggested corrections"'
+end
+
 desc 'Dryrun release of new gem version'
 task :gem_release_dryrun, [:bump_level] do |_t, args|
   args.with_defaults(bump_level: ENV['BUMP_LEVEL'] || 'patch')
