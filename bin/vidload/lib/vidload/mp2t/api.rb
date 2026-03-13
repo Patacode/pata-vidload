@@ -17,58 +17,75 @@ module Vidload
       ANSI_RESET = "\033[0m"
 
       class DownloaderBuilder
+        REQUIRED_ARGS = %i[video_url hls_url master_playlist_name playwright_cli_path video_referer
+                           ts_seg_pattern hls_index_pattern].freeze
+
         def initialize
           @kwargs = {}
         end
 
+        def with_kwargs(**kwargs)
+          @kwargs = kwargs
+          self
+        end
+
         def with_video_url(video_url)
           @kwargs[:video_url] = video_url
+          self
         end
 
         def with_video_name(video_name)
-          @kwargs[:video_name] = @kwargs[:author_name] ? "#{@kwargs[:author_name]}_#{video_name}" : nil
+          @kwargs[:video_name] = video_name
+          self
         end
 
         def with_author_name(author_name)
           @kwargs[:author_name] = author_name
+          self
         end
 
         def with_hls_url(hls_url)
           @kwargs[:hls_url] = hls_url
+          self
         end
 
         def with_master_playlist_name(master_playlist_name)
           @kwargs[:master_playlist_name] = master_playlist_name
+          self
         end
 
         def with_playwright_cli_path(playwright_cli_path)
           @kwargs[:playwright_cli_path] = playwright_cli_path
+          self
         end
 
         def with_video_referer(video_referer)
           @kwargs[:video_referer] = video_referer
+          self
         end
 
         def with_ts_seg_pattern(ts_seg_pattern)
           @kwargs[:ts_seg_pattern] = ts_seg_pattern
+          self
         end
 
         def with_hls_index_pattern(hls_index_pattern)
           @kwargs[:hls_index_pattern] = hls_index_pattern
+          self
         end
 
         def with_output_dir(output_dir)
-          @kwargs[:output_dir] = output_dir || './'
+          @kwargs[:output_dir] = output_dir
+          self
         end
 
         def build
-          raise ArgumentError, 'video_url must be provided' unless @kwargs[:video_url]
-          raise ArgumentError, 'hls_url must be provided' unless @kwargs[:hls_url]
-          raise ArgumentError, 'master_playlist_name must be provided' unless @kwargs[:master_playlist_name]
-          raise ArgumentError, 'playwright_cli_path must be provided' unless @kwargs[:playwright_cli_path]
-          raise ArgumentError, 'video_referer must be provided' unless @kwargs[:video_referer]
-          raise ArgumentError, 'ts_seg_pattern must be provided' unless @kwargs[:ts_seg_pattern]
-          raise ArgumentError, 'hls_index_pattern must be provided' unless @kwargs[:hls_index_pattern]
+          REQUIRED_ARGS.each do |required_arg|
+            raise ArgumentError, "#{required_arg} must be provided" unless @kwargs[required_arg]
+          end
+
+          @kwargs[:output_dir] = './' unless @kwargs[:output_dir]
+          @kwargs[:video_name] = "#{@kwargs[:author_name]}_#{@kwargs[:video_name]}" if @kwargs[:author_name]
 
           Downloader.new(**@kwargs)
         end
@@ -77,49 +94,20 @@ module Vidload
       class Downloader
         def initialize(**kwargs)
           @max_lines = IO.console.winsize[0]
-          @video_url = kwargs[:video_url]
-          @hls_url = kwargs[:hls_url]
-          @master_playlist_name = kwargs[:master_playlist_name]
-          @playwright_cli_path = kwargs[:playwright_cli_path]
-          @video_referer = kwargs[:video_referer]
-          @ts_seg_pattern = kwargs[:ts_seg_pattern]
-          @hls_index_pattern = kwargs[:hls_index_pattern]
-          @author_name = kwargs[:author_name]
-          @video_name = kwargs[:video_name]
-          @output_dir = kwargs[:output_dir]
+          @kwargs = kwargs
         end
 
-        def self.from_argv
-          new(
-            video_url: ARGV[0],
-            video_name: ARGV[1],
-            hls_url: ARGV[2],
-            master_playlist_name: ARGV[3],
-            playwright_cli_path: ARGV[4],
-            video_referer: ARGV[5],
-            ts_seg_pattern: ARGV[6],
-            hls_index_pattern: ARGV[7],
-            author_name: ARGV[8]
-          )
+        def self.builder
+          DownloaderBuilder.new
         end
 
         def self.from_hash(hash)
-          new(
-            video_url: hash[:video_url],
-            author_name: hash[:author_name],
-            video_name: hash[:video_name],
-            hls_url: hash[:hls_url],
-            master_playlist_name: hash[:master_playlist_name],
-            playwright_cli_path: hash[:playwright_cli_path],
-            video_referer: hash[:video_referer],
-            ts_seg_pattern: hash[:ts_seg_pattern],
-            hls_index_pattern: hash[:hls_index_pattern]
-          )
+          builder.with_kwargs(**hash).build
         end
 
         # main func to be called in your own scripts defined under web/
         def download_video(video_starter_callbacks: [])
-          Playwright.create(playwright_cli_executable_path: @playwright_cli_path) do |playwright|
+          Playwright.create(playwright_cli_executable_path: @kwargs[:playwright_cli_path]) do |playwright|
             browser = playwright.chromium.launch
             page = browser.new_page
 
@@ -134,15 +122,9 @@ module Vidload
           puts 'Constants:'
           puts "\tDEMUXER_PATH=#{DEMUXER_PATH}"
           puts 'Called with:'
-          puts "\tvideo_url=#{@video_url}"
-          puts "\tvideo_name=#{@video_name}"
-          puts "\thls_url=#{@hls_url}"
-          puts "\tmaster_playlist_name=#{@master_playlist_name}"
-          puts "\tplaywright_cli_path=#{@playwright_cli_path}"
-          puts "\tvideo_referer=#{@video_referer}"
-          puts "\tts_seg_pattern=#{@ts_seg_pattern}"
-          puts "\thls_index_pattern=#{@hls_index_pattern}"
-          puts "\tauthor_name=#{@author_name}"
+          @kwargs.each do |key, value|
+            puts "\t#{key}=#{value}"
+          end
         end
 
         def self.display_with_spinner(loading_msg = 'Loading...')
@@ -159,13 +141,13 @@ module Vidload
           @pending_hls_response = nil
           @lines = [''] * @max_lines
           page.on('response', ->(resp) { listen_to_video_starts(resp) })
-          navigate_to_url(@video_url, page)
+          navigate_to_url(@kwargs[:video_url], page)
           video_starter_callbacks.each do |callback|
             res = callback.call(page)
-            @video_name = res[:video_name] if !@video_name && res[:video_name]
-            if !@author_name && res[:author_name]
-              @author_name = res[:author_name]
-              @video_name = "#{@author_name}_#{@video_name}"
+            @kwargs[:video_name] = res[:video_name] if !@kwargs[:video_name] && res[:video_name]
+            if !@kwargs[:author_name] && res[:author_name]
+              @kwargs[:author_name] = res[:author_name]
+              @kwargs[:video_name] = "#{@kwargs[:author_name]}_#{@kwargs[:video_name]}"
             end
           end
         end
@@ -176,28 +158,29 @@ module Vidload
 
         def trigger_video_download(video_url, seg_qty)
           puts 'Video starts. Starting download...'
-          run_cmd(DEMUXER_PATH, video_url, "#{@output_dir}#{@video_name}", @video_referer) do |line|
-            if (line.include?('hls @') || line.include?('https @')) && line.match?(/#{@ts_seg_pattern}/i)
-              seg_nb = line.match(/#{@ts_seg_pattern}/i)[:seg_nb]
+          run_cmd(DEMUXER_PATH, video_url, "#{@kwargs[:output_dir]}#{@kwargs[:video_name]}",
+                  @kwargs[:video_referer]) do |line|
+            if (line.include?('hls @') || line.include?('https @')) && line.match?(/#{@kwargs[:ts_seg_pattern]}/i)
+              seg_nb = line.match(/#{@kwargs[:ts_seg_pattern]}/i)[:seg_nb]
               add_line(line)
               progress_bar(seg_nb, seg_qty)
             end
           end
           print "\r\e[2K"
-          puts "✔ Video downloaded successfully! Available in #{@output_dir}#{@video_name}.mp4"
+          puts "✔ Video downloaded successfully! Available in #{@kwargs[:output_dir]}#{@kwargs[:video_name]}.mp4"
           VIDEO_DOWNLOADED_EVENT_QUEUE << true
         end
 
         def listen_to_video_starts(response)
-          if response.url.start_with?(@hls_url) && response.url.match?(/#{@hls_index_pattern}/i)
+          if response.url.start_with?(@kwargs[:hls_url]) && response.url.match?(/#{@kwargs[:hls_index_pattern]}/i)
             body = response.text
             playlist = M3u8::Playlist.read(body)
             last_item = playlist.items.last.segment
-            match = last_item.match(/#{@ts_seg_pattern}/i)
+            match = last_item.match(/#{@kwargs[:ts_seg_pattern]}/i)
             @seg_qty = match[:seg_nb].to_i
 
             trigger_video_download(@pending_hls_response.url, @seg_qty) if @pending_hls_response
-          elsif response.url.start_with?(@hls_url) && response.url.include?(@master_playlist_name)
+          elsif response.url.start_with?(@kwargs[:hls_url]) && response.url.include?(@kwargs[:master_playlist_name])
             if @seg_qty
               trigger_video_download(response.url, @seg_qty)
             else
