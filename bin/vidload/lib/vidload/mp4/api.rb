@@ -42,8 +42,8 @@ module Vidload
           self
         end
 
-        def non_headless?(non_headless)
-          @kwargs[:non_headless] = non_headless
+        def is_headless?(headless)
+          @kwargs[:headless] = headless
           self
         end
 
@@ -74,7 +74,7 @@ module Vidload
         # main func to be called in your own scripts defined under web/
         def download_video
           Playwright.create(playwright_cli_executable_path: @kwargs[:playwright_cli_path]) do |playwright|
-            browser = playwright.chromium.launch(headless: !@kwargs[:non_headless])
+            browser = playwright.chromium.launch(headless: @kwargs[:headless])
             page = browser.new_page
 
             manage_video_download(page)
