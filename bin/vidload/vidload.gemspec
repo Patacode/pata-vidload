@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.add_dependency "m3u8", "~> 1.8"
   s.add_dependency "thor", "~> 1.5"
   s.add_development_dependency "rake"
+  s.add_development_dependency "rubocop"
 end
