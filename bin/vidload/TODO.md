@@ -9,7 +9,7 @@
 - [x] implement cli arg to provide video author name
 - [x] implement way to auto-name and auto-author a video if no name/author was
       given
-- [ ] fix bug infinite download hang
+- [x] fix bug infinite download hang
 - [x] add changelog mechanism
 - [x] add `[unreleased]` section to CHANGELOG.md when making new release
 - [x] create task to manage preparation of changelogs for next release
@@ -41,3 +41,4 @@
 - [x] remove usage of terminal-specific attributes in mp4 downloader
 - [ ] fix output_dir option in mp2t downloader
 - [x] fix loading messages in mp4 downloader
+- [x] add rake task to save rubocop changes
