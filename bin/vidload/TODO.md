@@ -9,7 +9,7 @@
 - [ ] implement cli arg to provide video author name
 - [ ] implement way to auto-name and auto-author a video if no name/author was
       given
-- [ ] add max waiting time for video download start
+- [ ] fix bug infinite download hang
 - [x] add changelog mechanism
 - [x] add `[unreleased]` section to CHANGELOG.md when making new release
 - [x] create task to manage preparation of changelogs for next release
