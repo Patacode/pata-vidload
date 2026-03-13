@@ -53,3 +53,5 @@
 - [x] improve rake tasks structure
 - [x] fix case conversion issue
 - [ ] implement site map/index
+- [ ] replace all bash scripts with ruby scripts
+- [ ] replace scripts by simple rake tasks where applicable
