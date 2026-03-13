@@ -166,11 +166,11 @@ module Vidload
               @kwargs[:video_name] = res[:video_name]
               @kwargs[:video_name] = LuckyCase.dash_case(@kwargs[:video_name].gsub(/[^[:alnum:] ]/, ''))
             end
-            if !@kwargs[:author_name] && res[:author_name]
-              @kwargs[:author_name] = res[:author_name]
-              @kwargs[:author_name] = LuckyCase.dash_case(@kwargs[:author_name].gsub(/[^[:alnum:] ]/, ''))
-              @kwargs[:video_name] = "#{@kwargs[:author_name]}_#{@kwargs[:video_name]}"
-            end
+            next unless !@kwargs[:author_name] && res[:author_name]
+
+            @kwargs[:author_name] = res[:author_name]
+            @kwargs[:author_name] = LuckyCase.dash_case(@kwargs[:author_name].gsub(/[^[:alnum:] ]/, ''))
+            @kwargs[:video_name] = "#{@kwargs[:author_name]}_#{@kwargs[:video_name]}"
           end
         end
 
