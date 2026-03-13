@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Changed
+
+- auto-naming feature in mp2t downloader remove all non-alphabetic chars except
+  spaces
+
 ## [0.5.0] - 13/03/2026
 
 ### Added
