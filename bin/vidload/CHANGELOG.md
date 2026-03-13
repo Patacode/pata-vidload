@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Changed
+
+- shorten name of release local rake task
+
+### Fixed
+
+- case conversion issue
+
 ## [0.5.1] - 13/03/2026
 
 ### Changed
