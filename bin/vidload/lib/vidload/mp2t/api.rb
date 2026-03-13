@@ -19,13 +19,14 @@ module Vidload::Mp2t::Api
     def initialize(
       video_url:,
       video_name:,
+      author_name:,
       hls_url:,
       master_playlist_name:,
       playwright_cli_path:,
       video_referer:,
       ts_seg_pattern:,
       hls_index_pattern:,
-      author_name:
+      output_dir:
     )
       raise ArgumentError, "video_url must be provided" unless video_url
       raise ArgumentError, "hls_url must be provided" unless hls_url
@@ -45,6 +46,7 @@ module Vidload::Mp2t::Api
       @max_lines = IO.console.winsize[0]
       @author_name = author_name
       @video_name = if @author_name then "#{@author_name}_#{video_name}" else nil end
+      @output_dir = output_dir || "./" 
     end
 
     def self.from_argv
@@ -136,7 +138,7 @@ module Vidload::Mp2t::Api
 
     def trigger_video_download(video_url, seg_qty)
       puts "Video starts. Starting download..."
-      run_cmd(DEMUXER_PATH, video_url, @video_name, @video_referer) do |line|
+      run_cmd(DEMUXER_PATH, video_url, "#{@output_dir}#{@video_name}", @video_referer) do |line|
         if (line.include?("hls @") || line.include?("https @")) && line.match?(/#{@ts_seg_pattern}/i)
           seg_nb = line.match(/#{@ts_seg_pattern}/i)[:seg_nb]
           add_line(line)
@@ -144,7 +146,7 @@ module Vidload::Mp2t::Api
         end
       end
       print "\r\e[2K"
-      puts "✔ Video downloaded successfully! Available in ./#{@video_name}.mp4"
+      puts "✔ Video downloaded successfully! Available in #{@output_dir}#{@video_name}.mp4"
       VIDEO_DOWNLOADED_EVENT_QUEUE << true
     end
 

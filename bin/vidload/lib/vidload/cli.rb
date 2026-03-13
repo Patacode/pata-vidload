@@ -4,6 +4,7 @@ class Vidload::Cli < Thor
   desc "mp2t VIDEO_URL", "download a mp2t containerized video"
   method_option :video_name, type: :string, required: false
   method_option :author_name, type: :string, required: false
+  method_option :output_dir, type: :string, required: false
   method_option :hls_url, type: :string, required: true
   method_option :master_playlist_name, type: :string, required: true
   method_option :playwright_cli_path, type: :string, required: true
@@ -20,7 +21,8 @@ class Vidload::Cli < Thor
       video_referer: options[:video_referer],
       ts_seg_pattern: options[:ts_seg_pattern],
       hls_index_pattern: options[:hls_index_pattern],
-      author_name: options[:author_name]
+      author_name: options[:author_name],
+      output_dir: options[:output_dir],
     }
 
     process_mp2t(params)
