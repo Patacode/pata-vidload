@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - auto-naming feature in mp2t downloader remove all non-alphabetic chars except
   spaces
+- rake tasks split in multiple small importable rake files
+
+### Fixed
+
+- add missing lucky_case runtime gem dependency to perform case conversion
 
 ## [0.5.0] - 13/03/2026
 
