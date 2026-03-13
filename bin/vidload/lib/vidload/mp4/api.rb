@@ -22,13 +22,13 @@ module Vidload
           self
         end
 
-        def with_video_name(video_name)
-          @kwargs[:video_name] = video_name
+        def with_video_url(video_url)
+          @kwargs[:video_url] = video_url
           self
         end
 
-        def with_video_url(video_url)
-          @kwargs[:video_url] = video_url
+        def with_video_name(video_name)
+          @kwargs[:video_name] = video_name
           self
         end
 
@@ -39,6 +39,11 @@ module Vidload
 
         def with_playwright_cli_path(playwright_cli_path)
           @kwargs[:playwright_cli_path] = playwright_cli_path
+          self
+        end
+
+        def is_non_headless(non_headless)
+          @kwargs[:non_headless] = non_headless
           self
         end
 
@@ -69,7 +74,7 @@ module Vidload
         # main func to be called in your own scripts defined under web/
         def download_video
           Playwright.create(playwright_cli_executable_path: @kwargs[:playwright_cli_path]) do |playwright|
-            browser = playwright.chromium.launch
+            browser = playwright.chromium.launch(headless: !@kwargs[:non_headless])
             page = browser.new_page
 
             manage_video_download(page)
