@@ -4,7 +4,7 @@ require 'thor'
 
 module Vidload
   class Cli < Thor
-    desc 'mp2t VIDEO_URL', 'download a mp2t containerized video'
+    desc 'mp2t VIDEO_URLS...', 'download one ore more mp2t containerized videos'
     method_option :video_name, type: :string, required: false
     method_option :author_name, type: :string, required: false
     method_option :output_dir, type: :string, required: false
@@ -16,27 +16,33 @@ module Vidload
     method_option :video_referer, type: :string, required: true
     method_option :ts_seg_pattern, type: :string, required: true
     method_option :hls_index_pattern, type: :string, required: true
-    def mp2t(video_url)
-      params = {
-        video_url: video_url,
-        **options
-      }
+    def mp2t(*video_urls)
+      video_urls.each do |video_url|
+        params = {
+          video_url: video_url,
+          **options
+        }
 
-      process_mp2t(params)
+        process_mp2t(params)
+        sleep 1
+      end
     end
 
-    desc 'mp4 VIDEO_URL', 'download a mp4 video'
+    desc 'mp4 VIDEO_URLS...', 'download one ore more mp4 videos'
     method_option :video_name, type: :string, required: false
     method_option :video_hub_url, type: :string, required: true
     method_option :playwright_cli_path, type: :string, required: true
     method_option :headless, type: :boolean, default: true
-    def mp4(video_url)
-      params = {
-        video_url: video_url,
-        **options
-      }
+    def mp4(*video_urls)
+      video_urls.each do |video_url|
+        params = {
+          video_url: video_url,
+          **options
+        }
 
-      process_mp4(params)
+        process_mp4(params)
+        sleep 1
+      end
     end
 
     private
