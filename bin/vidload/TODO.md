@@ -56,3 +56,4 @@
 - [ ] replace all bash scripts with ruby scripts
 - [ ] replace scripts by simple rake tasks where applicable
 - [ ] define rake task to normalize dir and filenames
+- [ ] convert to lowercase before dash-casing
