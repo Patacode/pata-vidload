@@ -6,8 +6,7 @@
 - [x] implement progress bar with segment infos instead of full ffmpeg output
 - [x] add cli arg to output .mp4 video into some custom dir
 - [x] implement cli arg to provide video author name
-- [x] implement way to auto-name and auto-author a video if no name/author was
-      given
+- [x] implement way to auto-name and auto-author a video if no name/author was given
 - [x] fix bug infinite download hang
 - [x] add changelog mechanism
 - [x] add `[unreleased]` section to CHANGELOG.md when making new release
