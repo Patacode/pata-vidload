@@ -75,7 +75,7 @@ module Vidload
         # main func to be called in your own scripts defined under web/
         def download_video(video_starter_callbacks: [])
           Playwright.create(playwright_cli_executable_path: @kwargs[:playwright_cli_path]) do |playwright|
-            browser = playwright.chromium.launch(headless: @kwargs["headless"])
+            browser = playwright.chromium.launch(headless: @kwargs['headless'])
             page = browser.new_page
 
             manage_video_download(page, *video_starter_callbacks)
@@ -103,12 +103,8 @@ module Vidload
         def manage_video_download(page, *video_starter_callbacks)
           video_starter_callbacks.each do |callback|
             res = callback.call(page, @kwargs)
-            if !@kwargs[:title] && res[:title]
-              @kwargs[:title] = res[:title]
-            end
-            if !@kwargs[:author_name] && res[:author_name]
-              @kwargs[:author_name] = res[:author_name]
-            end
+            @kwargs[:title] = res[:title] if !@kwargs[:title] && res[:title]
+            @kwargs[:author_name] = res[:author_name] if !@kwargs[:author_name] && res[:author_name]
           end
         end
       end
