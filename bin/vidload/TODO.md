@@ -31,7 +31,7 @@
 - [ ] add core linter
 - [x] add rake task for formatting
 - [ ] add rake task for linting
-- [ ] add support to download multiple videos
+- [x] add support to download multiple videos
 - [x] add support to group videos by author in separate directories
 - [x] add option to run in non-headless
 - [ ] provide useful default value for non-required args
@@ -56,4 +56,4 @@
 - [ ] replace scripts by simple rake tasks where applicable
 - [ ] define rake task to normalize dir and filenames
 - [ ] convert to lowercase before dash-casing
-- [ ] create new downloader for klickaud service
+- [x] create new custom downloader to ease creation of any other custom downloader
