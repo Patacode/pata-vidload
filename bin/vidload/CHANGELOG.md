@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- downloader around kickaud service
+- custom downloader to ease creation of any other custom downloaders
 - support to download multiple videos in one command
 
 ## [0.5.3] - 14/03/2026
