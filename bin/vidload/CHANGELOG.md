@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Changed
+
+- Cli base class now split into vidload types
+
 ## [0.6.0] - 24/03/2026
 
 ### Added
