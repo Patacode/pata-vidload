@@ -47,7 +47,7 @@
 - [ ] add loading animation to loading messages without animation
 - [ ] fix mp2t segment output display issue
 - [x] rename non-headless flag to headless
-- [ ] split downloader CLIs into separate class
+- [x] split downloader CLIs into separate class
 - [ ] implement check to verify if video already downloaded
 - [x] improve rake tasks structure
 - [x] fix case conversion issue
